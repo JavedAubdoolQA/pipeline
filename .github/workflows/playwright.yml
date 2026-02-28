@@ -22,10 +22,12 @@ jobs:
     - name: Start sample app in background
       run: |
         cd sample-app-web
-        npm start &
+        npm start > /tmp/app.log 2>&1 &
+        echo "App started, PID: $!"
 
     - name: Wait for sample app to be ready
-      run: npx wait-on http://localhost:3000
+      run: |
+        npx wait-on http://localhost:3000 --timeout 30000 || (cat /tmp/app.log && exit 1)
 
     - name: Install dependencies
       run: npm ci
