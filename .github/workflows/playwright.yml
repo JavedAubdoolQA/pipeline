@@ -14,10 +14,6 @@ jobs:
       with:
         node-version: lts/*
 
-    - name: Clone sample-app-web
-      run: |
-        git clone https://github.com/saucelabs/sample-app-web.git sample-app-web
-
     - name: Install sample-app dependencies
       run: |
         cd sample-app-web

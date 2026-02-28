@@ -6,6 +6,3 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-
-# local sample app repository (don't commit nested git repo)
-sample-app-web/
