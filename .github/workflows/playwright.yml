@@ -17,7 +17,7 @@ jobs:
     - name: Install sample-app dependencies
       run: |
         cd sample-app-web
-        npm ci
+        npm install
 
     - name: Start sample app in background
       run: |
