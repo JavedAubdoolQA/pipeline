@@ -13,12 +13,31 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+
+    - name: Install sample-app dependencies
+      run: |
+        cd sample-app-web
+        npm ci
+
+    - name: Start sample app in background
+      run: |
+        cd sample-app-web
+        npm start &
+
+    - name: Wait for sample app to be ready
+      run: npx wait-on http://localhost:3000
+
     - name: Install dependencies
       run: npm ci
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+
     - name: Run Playwright tests
+      env:
+        BASE_URL: http://localhost:3000
       run: npx bddgen && npx playwright test
+
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
